@@ -1,29 +1,27 @@
 <x-app-layout>
     @if($messagesCategoryComparison || $messagesSkillComparison)
-    <div class="flex justify-between bg-orange-600 ml-32 mr-32 mt-10 p-9 rounded-lg">
-        <div>
-            @foreach($messagesSkillComparison as $key => $value)
-                <h1 class="text-white">{{$value}}</h1><br>
-            @endforeach
-            @foreach($messagesCategoryComparison as $key => $value)
-                <div class="flex gap-3">
-                    <h1 class="text-white w-3/4">{{$value}}</h1> <button class="bg-white text-orange hover:text-orange-300 pl-2 pr-2 rounded-lg">Zmień</button><br>
+        <div class="flex justify-end bg-orange-600 mx-32 mt-10 p-4 rounded-lg">
+            <div>
+                @foreach($messagesSkillComparison as $key => $value)
+                    <h1 class="text-white">{{$value}}</h1>
+                @endforeach
+                @foreach($messagesCategoryComparison as $key => $value)
+                <div class="flex flex-col md:flex-row justify-between">
+                    <h1 class="text-white md:w-3/4 text-center md:text-left">{{$value}}</h1>
+                    {{-- Przycisk "Zmień" --}}
+                    <div class="flex items-center justify-center mt-6 md:mt-0">
+                        <a href="{{ route('profile.edit') }}" class="bg-white text-orange hover:text-orange-300 py-2 px-4 rounded-lg">Zmień</a>
+                    </div>
                 </div>
-            @endforeach
+                @endforeach
+            </div>
         </div>
-        <button class="align-self-end">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                 stroke="currentColor" class="w-6 h-6 text-white">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-            </svg>
-        </button>
-    </div>
     @endif
-    <div class="md:flex gap-x-6 p-3">
+    <div class="md:flex gap-x-6 mt-3">
         {{-- Lewy panel --}}
         <div class="ml-32 border-[1px] border-gray-300 dark:border-0 dark:bg-gray-800/50 p-6 w-3/4 rounded-lg">
             <div class="flex">
-                <img alt="{{$offer->slug}}" class="w-36 h-36 rounded-full object-cover" src="{{$offer->getURLImage()}}" />
+                {{-- <img alt="{{$offer->slug}}" class="w-36 h-36 rounded-full object-cover" src="{{$offer->getURLImage()}}" /> --}}
                 <div class="pl-4">
                     <div class="flex items-center">
                         <h1 class="text-2xl text-gray-600 dark:text-gray-400">{{$offer->name}}</h1>
@@ -31,8 +29,8 @@
                     </div>
                     <div class="flex mt-4">
                         <p>{{$offer->category->name}}</p>
-                        <p class="ml-7">{{$offer->employment->name}}</p>
-                        <p class="ml-7">{{$offer->contract->name}}</p>
+                        <p class="ml-7">{{$offer->employment}}</p>
+                        <p class="ml-7">{{$offer->contract}}</p>
                     </div>
                     <div class="flex mt-4">
                         @if($offer->salary && $offer->payment)

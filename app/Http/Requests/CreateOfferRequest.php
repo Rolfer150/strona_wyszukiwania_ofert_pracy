@@ -39,9 +39,9 @@ class CreateOfferRequest extends FormRequest
 
         return array_merge($validated, [
             'category_id' => $this->category_id,
-            'employment_id' => $this->employment_id,
-            'contract_id' => $this->contract_id,
-            'work_mode_id' => $this->work_mode_id,
+            'employment' => $this->employment,
+            'contract' => $this->contract,
+            'work_mode' => $this->work_mode,
         ]);
     }
 }

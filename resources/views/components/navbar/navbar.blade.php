@@ -52,11 +52,11 @@
                 </x-nav-link>
             </div>
             {{--      Strona z kalkulatorem obliczania wypłat brutto/netto      --}}
-            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+            {{-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                 <x-nav-link href="{{route('livewire.salary-calculator')}}">
                     {{ __('Kalkulator Wypłaty') }}
                 </x-nav-link>
-            </div>
+            </div> --}}
 
 {{--            <div>--}}
 {{--                @if(Auth::user()->image_path)--}}

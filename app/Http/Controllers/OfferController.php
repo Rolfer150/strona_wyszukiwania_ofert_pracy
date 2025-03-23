@@ -33,19 +33,19 @@ class OfferController extends Controller
         return view('home', compact('offers'));
     }
 
-//    public function showOffers(): View
-//    {
-//        $employments = Employment::employmentFilter();
-//        $contracts = Contract::contractFilter();
-//        $workmodes = WorkMode::workmodeFilter();
-//
-//        $new_offers = Offer::query()
-//            ->where('active', '=', 1)
-//            ->orderBy('created_at', 'desc')
-//            ->paginate(8);
-//
-//        return view('sidewidgets.offer', compact('new_offers'));
-//    }
+    //    public function showOffers(): View
+    //    {
+    //        $employments = Employment::employmentFilter();
+    //        $contracts = Contract::contractFilter();
+    //        $workmodes = WorkMode::workmodeFilter();
+    //
+    //        $new_offers = Offer::query()
+    //            ->where('active', '=', 1)
+    //            ->orderBy('created_at', 'desc')
+    //            ->paginate(8);
+    //
+    //        return view('sidewidgets.offer', compact('new_offers'));
+    //    }
 
     /**
      * Display a listing of the resource.
@@ -54,6 +54,7 @@ class OfferController extends Controller
     {
         $myOffers = Offer::query()
             ->where('user_id', '=', auth()->user()->id)
+            ->where('active', '=', true)
             ->orderBy('created_at', 'desc')
             ->get();
         return view('offer.myoffers', compact('myOffers'));
@@ -75,8 +76,15 @@ class OfferController extends Controller
             ->select('id', 'name')
             ->get();
         $skillLevel = SkillLevel::cases();
-        return view('offer.create', compact('categories', 'payments',
-            'employments', 'contracts', 'workModes', 'skills', 'skillLevel'));
+        return view('offer.create', compact(
+            'categories',
+            'payments',
+            'employments',
+            'contracts',
+            'workModes',
+            'skills',
+            'skillLevel'
+        ));
     }
 
     /**
@@ -84,13 +92,16 @@ class OfferController extends Controller
      */
     public function store(CreateOfferRequest $request): RedirectResponse
     {
+        // dd($request->all());
         $offer = new Offer($request->validated());
         $offer->slug = Str::slug($request->name);
         $offer->active = true;
+        $offer->employment = $request->employment;
+        $offer->contract = $request->contract;
+        $offer->work_mode = $request->work_mode;
         $offer->created_at = Carbon::now();
 
-        if ($request->hasFile('image_path'))
-        {
+        if ($request->hasFile('image_path')) {
             $file = $request->file('image_path');
             $fileName = $file->getClientOriginalName();
             $filePath = 'offer/' . $fileName;
@@ -114,9 +125,8 @@ class OfferController extends Controller
 
         try {
             $offer::where('id', '=', $offer->id)
-//                ->where('active', '=', 1)
-                ->when($user->id != $offer->user_id, function ($q)
-                {
+                //                ->where('active', '=', 1)
+                ->when($user->id != $offer->user_id, function ($q) {
                     $q->where('active', '=', 1);
                 })
                 ->firstOrFail();
@@ -131,8 +141,7 @@ class OfferController extends Controller
             $messagesSkillComparison = $system->displaySkillComparisonMessage($user->id, $offer->id);
             $messagesCategoryComparison = $system->displayCategoryComparisonMessage($user->id, $offer->id);
 
-            if ($offer->isUsersOffer())
-            {
+            if ($offer->isUsersOffer()) {
                 $messagesSkillComparison = null;
                 $messagesCategoryComparison = null;
                 $canNotApply = 'userMadeThisOffer';
@@ -153,7 +162,7 @@ class OfferController extends Controller
             ->where('offer_id', '=', $offer->id)
             ->get();
 
-//        dd($messages);
+        //        dd($messages);
         return view("offer.show", compact('offer', 'category_offers', 'canNotApply', 'skills', 'messagesSkillComparison', 'messagesCategoryComparison'));
     }
 
@@ -181,25 +190,25 @@ class OfferController extends Controller
         //
     }
 
-//    public function search(Request $request)
-//    {
-//        $q = $request->get('q');
-//
-//        $employments = Employment::employmentFilter();
-//        $contracts = Contract::contractFilter();
-//        $workmodes = WorkMode::workmodeFilter();
-//
-//        $searched_offers = Offer::query()
-//            ->where('active', '=', 1)
-//            ->whereDate('published_at', '<', Carbon::now())
-//            ->orderBy('published_at', 'desc')
-//            ->where(function ($query) use($q)
-//            {
-//                $query->where('name', 'like', "%$q%")
-//                    ->orWhere('description', 'like', "%$q%");
-//            })
-//            ->paginate(8);
-//
-//        return view('sidewidgets.search', compact('searched_offers', 'q'));
-//    }
+    //    public function search(Request $request)
+    //    {
+    //        $q = $request->get('q');
+    //
+    //        $employments = Employment::employmentFilter();
+    //        $contracts = Contract::contractFilter();
+    //        $workmodes = WorkMode::workmodeFilter();
+    //
+    //        $searched_offers = Offer::query()
+    //            ->where('active', '=', 1)
+    //            ->whereDate('published_at', '<', Carbon::now())
+    //            ->orderBy('published_at', 'desc')
+    //            ->where(function ($query) use($q)
+    //            {
+    //                $query->where('name', 'like', "%$q%")
+    //                    ->orWhere('description', 'like', "%$q%");
+    //            })
+    //            ->paginate(8);
+    //
+    //        return view('sidewidgets.search', compact('searched_offers', 'q'));
+    //    }
 }

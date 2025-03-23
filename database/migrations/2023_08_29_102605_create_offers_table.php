@@ -26,26 +26,12 @@ return new class extends Migration {
             $table->json('additionals')->nullable();
             $table->json('assurances')->nullable();
             $table->float('salary')->nullable();
-//            $table->float('min_salary')->nullable();
-//            $table->float('max_salary')->nullable();
             $table->enum('payment', PaymentType::values())
                 ->default(PaymentType::MBRUTTO->value);
             $table->integer('vacancy')->default(1);
             $table->foreignId('category_id')
                 ->constrained('categories')
                 ->cascadeOnDelete();
-//            $table->foreignId('employment_id')
-//                ->nullable()
-//                ->constrained('employments')
-//                ->cascadeOnDelete();
-//            $table->foreignId('contract_id')
-//                ->nullable()
-//                ->constrained('contracts')
-//                ->cascadeOnDelete();
-//            $table->foreignId('work_mode_id')
-//                ->nullable()
-//                ->constrained('work_modes')
-//                ->cascadeOnDelete();
             $table->enum('employment', Employment::values());
             $table->enum('contract', Contract::values());
             $table->enum('work_mode', WorkMode::values());

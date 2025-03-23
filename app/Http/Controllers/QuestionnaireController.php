@@ -41,13 +41,13 @@ class QuestionnaireController extends Controller
      */
     public function store(Request $request)
     {
-//        dd($request->input('offers'));
+        //        dd($request->input('offers'));
         $name = $request->input('name');
         $questionnaire = new Questionnaire;
         $questionnaire->name = $name;
         $questionnaire->slug = Str::slug($name);
         $questionnaire->description = $request->input('description');
-//        $questionnaire->offer_id = $request->input('offers');
+        //        $questionnaire->offer_id = $request->input('offers');
         $request->user()->questionnaires()->save($questionnaire);
 
         $offers = Offer::query()
@@ -56,10 +56,8 @@ class QuestionnaireController extends Controller
             ->orderBy('created_at', 'desc')
             ->first();
 
-        foreach ($request->input('offers') as $key => $value)
-        {
-            if ($value == $offers->id)
-            {
+        foreach ($request->input('offers') as $key => $value) {
+            if ($value == $offers->id) {
                 $offers->questionnaire_id->fill($questionnaire->id);
             }
         }

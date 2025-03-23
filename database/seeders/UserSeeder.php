@@ -3,10 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
-use Spatie\Permission\Models\Role;
 
 class UserSeeder extends Seeder
 {
@@ -15,19 +13,38 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        /** @var \App\Models\User $adminUser **/
-
-        $name = 'Admin';
-        $surname = 'Admiński';
-
-        $adminUser = User::factory()->create([
+        // Admin
+        $admin = User::factory()->create([
             'email' => 'admin@test.pl',
-            'name' => $name,
-            'surname' => $surname,
-            'slug' => Str::slug($name . '-' . $surname . '-' . random_int(1000, 9999)),
+            'name' => 'Admin',
+            'surname' => 'Admiński',
+            'slug' => Str::slug('Admin-Admiński-' . rand(1000, 9999)),
             'password' => bcrypt('test1234')
         ]);
+        $admin->assignRole('admin');
 
-        $adminUser->assignRole('admin');
+        // Pracodawcy
+        foreach (range(1, 3) as $i) {
+            $employer = User::factory()->create([
+                'email' => "employer$i@test.pl",
+                'name' => "Pracodawca$i",
+                'surname' => "Firma$i",
+                'slug' => Str::slug("Pracodawca$i-Firma$i-" . rand(1000, 9999)),
+                'password' => bcrypt('test1234')
+            ]);
+            $employer->assignRole('employer');
+        }
+
+        // Kandydaci
+        foreach (range(1, 5) as $i) {
+            $candidate = User::factory()->create([
+                'email' => "candidate$i@test.pl",
+                'name' => "Kandydat$i",
+                'surname' => "Nowak$i",
+                'slug' => Str::slug("Kandydat$i-Nowak$i-" . rand(1000, 9999)),
+                'password' => bcrypt('test1234')
+            ]);
+            $candidate->assignRole('candidate');
+        }
     }
 }

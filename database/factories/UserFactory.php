@@ -29,12 +29,11 @@ class UserFactory extends Factory
             'name' => $user_name,
             'surname' => $user_surname,
             'slug' => Str::slug($user_name . '-' . $user_surname . '-' . random_int(1000, 9999)),
-            'image_path' => fake()->imageUrl,
             'birth_date' => $birth_date,
             'phone_number' => fake()->phoneNumber,
             'education' => fake()->randomElement(EducationalStage::cases()),
             'school' => fake()->text(50),
-//            'short_description' => fake()->realText(128),
+            //            'short_description' => fake()->realText(128),
             'description' => fake()->realText(1024),
             'address' => [
                 'city' => fake()->city,

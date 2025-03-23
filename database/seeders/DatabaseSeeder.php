@@ -11,6 +11,7 @@ use App\Models\Skill;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Arr;
 
 class DatabaseSeeder extends Seeder
 {
@@ -21,21 +22,21 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             CategorySeeder::class,
-//            ContractSeeder::class,
-//            EmploymentSeeder::class,
-//            WorkModeSeeder::class,
+            //            ContractSeeder::class,
+            //            EmploymentSeeder::class,
+            //            WorkModeSeeder::class,
             RoleSeeder::class,
             SkillSeeder::class,
             UserSeeder::class
         ]);
 
-        User::factory(80)->create()->each(function ($user)
-        {
-            $user->assignRole('user');
+        User::factory(80)->create()->each(function ($user) {
+            $role = Arr::random(['employer', 'candidate']);
+            $user->assignRole($role);
         });
         Offer::factory(1000)->create();
         Company::factory(100)->create();
-//        Skill::factory(200)->create();
+        //        Skill::factory(200)->create();
 
         $categories = Category::all();
         $skills = Skill::all();
@@ -45,6 +46,9 @@ class DatabaseSeeder extends Seeder
         User::all()->each(function ($user) use ($categories, $skills) {
             $user->categories()->saveMany($categories->random(2));
             $user->skills()->saveMany($skills->random(2));
+        });
+        Offer::all()->each(function ($offer) use ($skills) {
+            $offer->skills()->saveMany($skills->random(2));
         });
     }
 }

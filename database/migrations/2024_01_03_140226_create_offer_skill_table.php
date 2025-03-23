@@ -17,7 +17,9 @@ return new class extends Migration
             $table->foreignId('offer_id')
                 ->constrained('offers')
                 ->cascadeOnDelete();
-            $table->enum('skill', ProgrammingSkills::values())->nullable();
+            $table->foreignId('skill_id')
+                ->constrained('skills')
+                ->cascadeOnDelete();
             $table->enum('skill_level', SkillLevel::values())->nullable();
         });
     }

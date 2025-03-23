@@ -23,9 +23,9 @@ class System
 
     public function index(): View
     {
-//        dd($this->getHelpForUserToImproveSkills($this->getCurrentUser()->id, 41));
-//        $tips = $this->getHelpForUserToImproveSkills($this->getCurrentUser()->id, 41);
-//        dd($tips);
+        //        dd($this->getHelpForUserToImproveSkills($this->getCurrentUser()->id, 41));
+        //        $tips = $this->getHelpForUserToImproveSkills($this->getCurrentUser()->id, 41);
+        //        dd($tips);
         $message = $this->displaySkillComparisonMessage(82, 41);
         dd($this->skillComparison(82, 41));
         $currentUser = $this->getCurrentUser();
@@ -57,17 +57,17 @@ class System
     {
         return Offer::query()
             ->where('user_id', '=', $this->getCurrentUser()->id)
-//            ->join('category_company', 'companies.id', '=', 'category_company.company_id')
+            //            ->join('category_company', 'companies.id', '=', 'category_company.company_id')
             ->pluck('category_id')
             ->toArray();
     }
 
     public function getUserSkill($userID = null)
     {
-        return Skill::query()
-            ->select('skills.skill', 'skills.skill_level')
-            ->where('skills.user_id', '=', $userID)
-            ->select('skills.skill', 'skills.skill_level')
+        return User::query()
+            ->join('skill_user', 'users.id', '=', 'skill_user.user_id')
+            ->where('id', '=', $userID)
+            ->select('skill_user.skill_id', 'skill_user.skill_level')
             ->get()
             ->toArray();
     }
@@ -77,7 +77,7 @@ class System
         return Offer::query()
             ->join('offer_skill', 'offers.id', '=', 'offer_skill.offer_id')
             ->where('id', '=', $offerID)
-            ->select('offer_skill.skill', 'offer_skill.skill_level')
+            ->select('offer_skill.skill_id', 'offer_skill.skill_level')
             ->get()
             ->toArray();
     }
@@ -119,37 +119,35 @@ class System
     public function displaySkillComparisonMessage($userID, $offerID)
     {
         $skillComparison = $this->skillComparison($userID, $offerID);
-//        dd($skillComparison);
+        //        dd($skillComparison);
         $messagesArray = [];
 
         foreach ($skillComparison as $comparison) {
             $message = "{$comparison['skill']}: ";
 
-            if ($comparison['user_skill_level'] > $comparison['required_skill_level'] && $comparison['required_skill_level'])
-            {
+            if ($comparison['user_skill_level'] > $comparison['required_skill_level'] && $comparison['required_skill_level']) {
                 $message .= "Twój poziom umiejętności ({$comparison['user_skill_level']}) jest wyższy niż podany w wymaganiach: ({$comparison['required_skill_level']})!";
                 $messagesArray[$comparison['skill']] = $message;
             }
-            if ($comparison['user_skill_level'] < $comparison['required_skill_level'] && $comparison['required_skill_level'])
-            {
+            if ($comparison['user_skill_level'] < $comparison['required_skill_level'] && $comparison['required_skill_level']) {
                 $message .= "Twój poziom umiejętności ({$comparison['user_skill_level']}) jest niższy od wymaganego poziomu umiejętności: ({$comparison['required_skill_level']}). " . $this->helpForImprovingSkill($comparison['skill'], $comparison['user_skill_level']);
                 $messagesArray[$comparison['skill']] = $message;
             }
-//            if ($comparison['is_matching']) {
-//                $message .= "You meet the required skill level ({$comparison['required_skill_level']}).";
-//                $messagesArray[$comparison['skill']] = $message;
-//            }
-//            else {
-//                if ($comparison['required_skill_level'] !== null) {
-//                    $message .= "Your skill level ({$comparison['user_skill_level']}) does not meet the required skill level ({$comparison['required_skill_level']}).";
-//                    $messagesArray[$comparison['skill']] = $message;
-//                } else {
-//                    $message .= "You do not possess the required skill.";
-//                    $messagesArray[$comparison['skill']] = $message;
-//                }
-//            }
+            //            if ($comparison['is_matching']) {
+            //                $message .= "You meet the required skill level ({$comparison['required_skill_level']}).";
+            //                $messagesArray[$comparison['skill']] = $message;
+            //            }
+            //            else {
+            //                if ($comparison['required_skill_level'] !== null) {
+            //                    $message .= "Your skill level ({$comparison['user_skill_level']}) does not meet the required skill level ({$comparison['required_skill_level']}).";
+            //                    $messagesArray[$comparison['skill']] = $message;
+            //                } else {
+            //                    $message .= "You do not possess the required skill.";
+            //                    $messagesArray[$comparison['skill']] = $message;
+            //                }
+            //            }
 
-//            dd($messagesArray);
+            //            dd($messagesArray);
         }
         return $messagesArray;
     }
@@ -170,7 +168,7 @@ class System
             'is_matching' => $isMatching,
         ];
 
-//        dd($categoryComparison);
+        //        dd($categoryComparison);
         return $categoryComparison;
     }
 
@@ -191,8 +189,7 @@ class System
 
     public function helpForImprovingSkill($skill = null, $skillLevel = null)
     {
-        switch ($skill)
-        {
+        switch ($skill) {
             case 'Php':
                 if ($skillLevel === 1) return 'Php: Proponowane porady o poziomie umiejętności ' . $skillLevel . ':';
                 elseif ($skillLevel === 2) return 'Php: Proponowane porady o poziomie umiejętności ' . $skillLevel . ':';
@@ -213,8 +210,7 @@ class System
         $skillComparison = $this->skillComparison($userID, $offerID);
         $messagesArray = [];
 
-        foreach ($skillComparison as $comparison)
-        {
+        foreach ($skillComparison as $comparison) {
             $message = $this->helpForImprovingSkill($comparison['skill'], $comparison['user_skill_level']);
             $messagesArray[] = $message;
         }

@@ -57,7 +57,7 @@
                             focus:ring-indigo-500 dark:focus:ring-indigo-600 w-4/5">
                         <option value=""></option>
                         @foreach($skills as $skill)
-                            <option value="{{$skill->value}}">{{$skill->value}}</option>
+                            <option value="{{$skill->id}}">{{$skill->name}}</option>
                         @endforeach
                     </select>
                     <select id="skill_level" name="skills[]" placeholder="Wybierz Twoje oczekiwania..."
