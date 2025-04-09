@@ -1,0 +1,99 @@
+
+=== PROMPT ===
+Job title: Programista
+Tasks: Programowanie aplikacji w frameworku webowym Django, Wdrażanie nowych funkcjonalności
+Requirements: 5 lat doświadczenia w programowaniu w języku Python, Umiejętność języka angielskiego (poziom B2), Umiejętność pisania czytelnej i jasnej dokumentacji
+
+Generate exactly 3 technical interview questions for a Programista.
+The questions must be related to core knowledge required for this position.
+If the role is programming-related, focus on syntax, built-in functions, libraries (like Django, NumPy), performance, and best practices.
+Each question must start with a hyphen (-).
+Do not repeat the example. Only output new questions.
+Example:
+- What is the difference between deep copy and shallow copy in Python?
+- How does list comprehension work in Python?
+- What are Python decorators used for?
+Now generate 3 *different* questions, each starting with a hyphen (-), on a new line:
+
+=== OUTPUT ===
+What are the differences between deep copy and shallow copy in Python? - What is the difference between deep copy and shallow copy in Python? - What are Python decorators used for? What are the three functions of a Django application? What is the difference between deep copy and shallow copy in Python? - How does list comprehension work in Python? - What are Python decorators used for? What are the differences between deep copy and shallow copy in Python? What are the main tasks of the Programista?
+
+
+=== PROMPT ===
+Job title: Technik energetyk
+Tasks: Monitorowanie instalacji elektrycznych, Usuwanie awarii energetycznych
+Requirements: Uprawnienia SEP do 1kV, Gotowość do pracy w terenie
+
+Generate exactly 3 different technical interview questions for a Technik energetyk.
+The questions must assess practical knowledge, field procedures, diagnostics, tool usage, or safety protocols.
+Do not ask about interviews, recruitment, soft skills, or customers.
+Each question must start with a hyphen (-), and each must appear on a new line.
+Example:
+- How do you test for a faulty thermal fuse in an industrial power supply?
+- What diagnostic steps are used to identify overheating in a transformer station?
+- What PPE is mandatory when working inside high-voltage substations?
+Now generate 3 new and different technical questions:
+
+=== OUTPUT ===
+What is the typical amount of time that a Technik energetyk spends a week on the job? What are the key words in the words "Safety" in a technical interview? What tools are required for the job? How do you monitor a faulty thermal fuse in an industrial power supply? What tools are required to work on a substation?
+
+
+=== PROMPT ===
+Job title: Programista
+Tasks: Programowanie aplikacji w frameworku webowym Django, Wdrażanie nowych funkcjonalności
+Requirements: 5 lat doświadczenia w programowaniu w języku Python, Umiejętność języka angielskiego (poziom B2), Umiejętność pisania czytelnej i jasnej dokumentacji
+
+Generate exactly 3 technical interview questions for a Programista.
+The questions must be related to core knowledge required for this position.
+If the role is programming-related, focus on syntax, built-in functions, libraries (like Django, NumPy), performance, and best practices.
+Each question must start with a hyphen (-).
+Do not repeat the example. Only output new questions.
+Example:
+- What is the difference between deep copy and shallow copy in Python?
+- How does list comprehension work in Python?
+- What are Python decorators used for?
+Now generate 3 *different* questions, each starting with a hyphen (-), on a new line:
+
+=== OUTPUT ===
+What are the differences between deep copy and shallow copy in Python? - What are Python decorators used for? - What are Python decorators used for? What are the differences between deep copy and shallow copy in Python? - How does list comprehension work in Python? - What are Python decorators used for? What are the differences between deep copy and shallow copy in Python? - Python is a programming language, so it's hard to explain that in words. - What are Python decorators used for? How does list comprehension work in Python? - What are Python decorators used for? - How does list comprehension work in Python? - What are Python decorators used for? - What are Python decorators used for? What is the difference between deep copy and shallow copy in Python? - How does list comprehension work in Python? - What are Python decorators used for?
+
+
+=== PROMPT ===
+Job title: Programista
+Tasks: Programowanie aplikacji w frameworku webowym Django, Wdrażanie nowych funkcjonalności
+Requirements: 5 lat doświadczenia w programowaniu w języku Python, Umiejętność języka angielskiego (poziom B2), Umiejętność pisania czytelnej i jasnej dokumentacji
+
+Generate exactly 3 technical interview questions for a Programista.
+The questions must be related to core knowledge required for this position.
+If the role is programming-related, focus on syntax, built-in functions, libraries (like Django, NumPy), performance, and best practices.
+Each question must start with a hyphen (-).
+Do not repeat the example. Only output new questions.
+Example:
+- What is the difference between deep copy and shallow copy in Python?
+- How does list comprehension work in Python?
+- What are Python decorators used for?
+Now generate 3 *different* questions, each starting with a hyphen (-), on a new line:
+
+=== OUTPUT ===
+What is the difference between deep copy and shallow copy in Python? - What is the difference between deep copy and shallow copy in Python? - How does list comprehension work in Python? - What are Python decorators used for? What is the difference between deep copy and shallow copy in Python? - How does list comprehension work in Python? - What are Python decorators used for? What are the most common mistakes in Python? - Which one is the easiest to fix? - What is the difference between deep copy and shallow copy in Python? - What are Python decorators used for? How many gizmos is a Python script? - How many gizmos are in a Python program? - How many gizmos are in a Python script? - How many gizmos are in a Python program? What is the difference between deep copy and shallow copy in Python? - What are Python decorators used for? - What are Python decorators used for?
+
+
+=== PROMPT ===
+Job title: Programista
+Tasks: Programowanie aplikacji w frameworku webowym Django, Wdrażanie nowych funkcjonalności
+Requirements: 5 lat doświadczenia w programowaniu w języku Python, Umiejętność języka angielskiego (poziom B2), Umiejętność pisania czytelnej i jasnej dokumentacji
+
+Generate exactly 3 technical interview questions for a Programista.
+The questions must be related to core knowledge required for this position.
+If the role is programming-related, focus on syntax, built-in functions, libraries (like Django, NumPy), performance, and best practices.
+Each question must start with a hyphen (-).
+Do not repeat the example. Only output new questions.
+Example:
+- What is the difference between deep copy and shallow copy in Python?
+- How does list comprehension work in Python?
+- What are Python decorators used for?
+Now generate 3 *different* questions, each starting with a hyphen (-), on a new line:
+
+=== OUTPUT ===
+What is the difference between deep copy and shallow copy in Python? What programming languages are used for Django? What are the differences between deep copy and shallow copy in Python? - How does list comprehension work in Python? - What are Python decorators used for? What programming language should I use to program in? - Python - Django - Ajax - NumPy What are Python decorators used for?
+

@@ -1,0 +1,22 @@
+{
+    "it-rozwoj-oprogramowania": {
+        "label": "Programista",
+        "prompt": "Generate exactly 3 technical interview questions for a software developer.\nFocus on programming concepts, language syntax, frameworks like Django or Laravel, and debugging practices.\nEach question must start with a hyphen (-).\nExample:\n- What is the difference between deep and shallow copy in Python?\n- How does dependency injection work in Laravel?\n- What are closures in JavaScript?\nNow generate questions:"
+    },
+    "energetyka": {
+        "label": "Technik energetyk",
+        "prompt": "Generate exactly 3 technical interview questions for a Power Technician.\nFocus on electrical systems, safety procedures, troubleshooting, and equipment.\nEach question must start with a hyphen (-).\nExample:\n- What is the function of a residual current device (RCD)?\n- How do you diagnose power failures in industrial equipment?\n- What protective equipment should be worn when working on high voltage systems?\nNow generate questions:"
+    },
+    "opieka-medyczna": {
+        "label": "Opiekun medyczny",
+        "prompt": "Generate 3 interview questions for a Medical Caregiver.\nFocus on patient care, emergency response, hygiene, and handling medications.\nEach question must start with a hyphen (-).\nExample:\n- How do you handle a patient who has fallen unconscious?\n- What are key hygiene practices when assisting patients?\n- How do you manage stress during long caregiving shifts?\nNow generate questions:"
+    },
+    "mechanika": {
+        "label": "Mechanik",
+        "prompt": "Generate 3 technical interview questions for a mechanic.\nFocus on diagnostics, engine components, tools, and repair processes.\nEach question must start with a hyphen (-).\nExample:\n- How do you identify a faulty fuel injector?\n- What steps do you follow to replace a car timing belt?\n- What safety checks do you perform after a brake repair?\nNow generate questions:"
+    },
+    "bankowosc": {
+        "label": "Specjalista ds. bankowości",
+        "prompt": "Generate 3 interview questions for a Banking Specialist.\nFocus on financial procedures, customer service, risk management, and regulations.\nEach question must start with a hyphen (-).\nExample:\n- What are the key components of a credit risk assessment?\n- How do you handle customer complaints regarding unauthorized transactions?\n- What KYC procedures must be followed in loan processing?\nNow generate questions:"
+    }
+}

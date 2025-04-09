@@ -1,7 +1,6 @@
 <div class="mt-4">
-    <h4 class="text-md font-medium">Pytania rekrutacyjne</h4>
+    <h4 class="text-md font-medium">Generator pytań</h4>
 
-    <!-- Przycisk do generowania -->
     <button wire:click="generateQuestions"
             wire:loading.attr="disabled"
             class="bg-blue-500 text-white px-4 py-2 rounded mt-2">
@@ -9,14 +8,12 @@
         <span wire:loading>Generowanie...</span>
     </button>
 
-    <!-- Lista pytań -->
-    @if(count($generatedQuestions) > 0)
+    @if(!empty($generatedQuestions))
         <ul class="mt-3 list-disc list-inside">
             @foreach($generatedQuestions as $question)
-                <li class="text-gray-700 dark:text-gray-300">{{ $question }}</li>
+                <li>{{ is_array($question) ? json_encode($question) : $question }}</li>
             @endforeach
         </ul>
-    @else
-        <p class="text-gray-500 mt-2">Brak wygenerowanych pytań.</p>
     @endif
 </div>
+

@@ -1,5 +1,5 @@
 <x-app-layout>
-    @if($messagesCategoryComparison || $messagesSkillComparison)
+    {{-- @if($messagesCategoryComparison || $messagesSkillComparison)
         <div class="flex justify-end bg-orange-600 mx-32 mt-10 p-4 rounded-lg">
             <div>
                 @foreach($messagesSkillComparison as $key => $value)
@@ -7,16 +7,16 @@
                 @endforeach
                 @foreach($messagesCategoryComparison as $key => $value)
                 <div class="flex flex-col md:flex-row justify-between">
-                    <h1 class="text-white md:w-3/4 text-center md:text-left">{{$value}}</h1>
+                    <h1 class="text-white md:w-3/4 text-center md:text-left">{{$value}}</h1> --}}
                     {{-- Przycisk "Zmień" --}}
-                    <div class="flex items-center justify-center mt-6 md:mt-0">
+                    {{-- <div class="flex items-center justify-center mt-6 md:mt-0">
                         <a href="{{ route('profile.edit') }}" class="bg-white text-orange hover:text-orange-300 py-2 px-4 rounded-lg">Zmień</a>
                     </div>
                 </div>
                 @endforeach
             </div>
         </div>
-    @endif
+    @endif --}}
     <div class="md:flex gap-x-6 mt-3">
         {{-- Lewy panel --}}
         <div class="ml-32 border-[1px] border-gray-300 dark:border-0 dark:bg-gray-800/50 p-6 w-3/4 rounded-lg">

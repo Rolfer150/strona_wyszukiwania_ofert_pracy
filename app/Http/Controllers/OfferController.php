@@ -137,13 +137,13 @@ class OfferController extends Controller
         $canNotApply = '';
 
         if ($user) {
-            $system = new System;
-            $messagesSkillComparison = $system->displaySkillComparisonMessage($user->id, $offer->id);
-            $messagesCategoryComparison = $system->displayCategoryComparisonMessage($user->id, $offer->id);
+            // $system = new System;
+            // $messagesSkillComparison = $system->displaySkillComparisonMessage($user->id, $offer->id);
+            // $messagesCategoryComparison = $system->displayCategoryComparisonMessage($user->id, $offer->id);
 
             if ($offer->isUsersOffer()) {
-                $messagesSkillComparison = null;
-                $messagesCategoryComparison = null;
+                // $messagesSkillComparison = null;
+                // $messagesCategoryComparison = null;
                 $canNotApply = 'userMadeThisOffer';
             }
             if ($offer->userHasApplied()) $canNotApply = 'userHasApplied';
@@ -163,7 +163,8 @@ class OfferController extends Controller
             ->get();
 
         //        dd($messages);
-        return view("offer.show", compact('offer', 'category_offers', 'canNotApply', 'skills', 'messagesSkillComparison', 'messagesCategoryComparison'));
+        // return view("offer.show", compact('offer', 'category_offers', 'canNotApply', 'skills', 'messagesSkillComparison', 'messagesCategoryComparison'));
+        return view("offer.show", compact('offer', 'category_offers', 'canNotApply', 'skills'));
     }
 
     /**

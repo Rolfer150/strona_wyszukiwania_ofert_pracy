@@ -52,8 +52,7 @@ class ProfileController extends Controller
 
         $request->user()->education = $request->education;
 
-        if ($request->hasFile('image_path'))
-        {
+        if ($request->hasFile('image_path')) {
             $file = $request->file('image_path');
             $fileName = $file->getClientOriginalName();
             $filePath = 'user/' . $fileName;
@@ -69,13 +68,11 @@ class ProfileController extends Controller
         ];
         $request->user()->address = $addressArray;
 
-        if ($request->skills)
-        {
+        if ($request->skills) {
             Skill::query()
                 ->where('user_id', '=', $request->user()->id)
                 ->delete();
-            foreach ($request->skills as $skill)
-            {
+            foreach ($request->skills as $skill) {
                 $skillModel = new Skill;
                 $skillModel->skill = $skill['skill'];
                 $skillModel->skill_level = $skill['skillLevel'];
@@ -84,11 +81,9 @@ class ProfileController extends Controller
             }
         }
 
-        if ($request->categories)
-        {
+        if ($request->categories) {
             $request->user()->categories()->detach();
-            foreach ($request->categories as $category)
-            {
+            foreach ($request->categories as $category) {
                 $categories = Category::query()
                     ->where('name', '=', $category['category'])
                     ->pluck('id')

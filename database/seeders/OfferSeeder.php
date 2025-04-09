@@ -19,21 +19,27 @@ class OfferSeeder extends Seeder
      */
     public function run(): void
     {
-        $user = User::first();
-        $itCategory = Category::where('slug', 'it-rozwoj-oprogramowania')->first();
-        $gastronomy = Category::where('slug', 'gastronomia')->first();
-        $transport = Category::where('slug', 'transport-logistyka')->first();
-        $education = Category::where('slug', 'edukacja-szkolenia')->first();
+        $employers = User::role('employer')->get();
 
-        if (!$user || !$itCategory || !$gastronomy || !$transport || !$education) {
-            $this->command->error('Brakuje użytkownika lub kategorii. Najpierw uruchom UserSeeder i CategorySeeder.');
+        if ($employers->count() < 3) {
+            $this->command->error('Potrzeba co najmniej 3 użytkowników z rolą employer.');
+            return;
+        }
+
+        $categoryIT = Category::where('slug', 'it-rozwoj-oprogramowania')->first();
+        $categoryFizyczna = Category::where('slug', 'praca-fizyczna')->first();
+        $categoryObsluga = Category::where('slug', 'obsluga-klienta')->first();
+        $categoryEnergetyka = Category::where('slug', 'energetyka')->first();
+
+        if (!$categoryIT || !$categoryFizyczna || !$categoryObsluga || !$categoryEnergetyka) {
+            $this->command->error('Brakuje jednej z wymaganych kategorii. Uruchom najpierw CategorySeeder.');
             return;
         }
 
         Offer::create([
             'name' => 'Programista',
             'slug' => Str::slug('Programista'),
-            // 'image_path' => 'offer/python-programming-language.png',
+            'image_path' => 'offer/python-programming-language.png',
             'description' => 'Ogłoszenie o naborze na stanowisko programisty Python projektującego aplikacje webowe w Django.',
             'tasks' => [
                 'Programowanie aplikacji w frameworku webowym Django',
@@ -53,106 +59,73 @@ class OfferSeeder extends Seeder
             ],
             'active' => true,
             'vacancy' => 1,
-            'user_id' => $user->id,
+            'user_id' => 2,
             'payment' => PaymentType::MNETTO,
             'salary' => 20000,
-            'category_id' => $itCategory->id,
+            'category_id' => $categoryIT->id,
             'employment' => Employment::PELNY_ETAT,
             'contract' => Contract::UMOWA_O_PRACE,
             'work_mode' => WorkMode::PRACA_STACJONARNA
         ]);
 
         Offer::create([
-            'name' => 'Kucharz',
-            'slug' => Str::slug('Kucharz'),
-            // 'image_path' => 'offer/kucharz.png',
-            'description' => 'Poszukujemy doświadczonego kucharza do restauracji z kuchnią polską.',
-            'tasks' => [
-                'Przygotowywanie dań według receptur',
-                'Zachowanie higieny i czystości na stanowisku pracy'
-            ],
-            'expectancies' => [
-                'Min. 2 lata doświadczenia w gastronomii',
-                'Zaangażowanie i punktualność'
-            ],
-            'additionals' => [
-                'Kurs HACCP'
-            ],
-            'assurances' => [
-                'Elastyczny grafik',
-                'Posiłki pracownicze'
-            ],
+            'name' => 'Magazynier',
+            'slug' => Str::slug('Magazynier'),
+            'image_path' => 'offer/magazynier.jpg',
+            'description' => 'Praca fizyczna polegająca na kompletowaniu zamówień i obsłudze wózka widłowego.',
+            'tasks' => ['Kompletowanie zamówień', 'Rozładunek i załadunek towarów'],
+            'expectancies' => ['Uprawnienia UDT na wózki widłowe', 'Sprawność fizyczna'],
+            'additionals' => ['Doświadczenie na magazynie'],
+            'assurances' => ['Stała praca w systemie zmianowym', 'Odzież robocza i szkolenia BHP'],
             'active' => true,
             'vacancy' => 2,
-            'user_id' => $user->id,
-            'payment' => PaymentType::HNETTO,
-            'salary' => 25,
-            'category_id' => $gastronomy->id,
+            'user_id' => 3,
+            'payment' => PaymentType::HBRUTTO,
+            'salary' => 28,
+            'category_id' => $categoryFizyczna->id,
             'employment' => Employment::PELNY_ETAT,
             'contract' => Contract::UMOWA_O_PRACE,
             'work_mode' => WorkMode::PRACA_STACJONARNA
         ]);
 
         Offer::create([
-            'name' => 'Kierowca C+E',
-            'slug' => Str::slug('Kierowca C+E'),
-            'image_path' => 'offer/kierowca.png',
-            'description' => 'Firma transportowa poszukuje kierowcy C+E na trasach międzynarodowych.',
-            'tasks' => [
-                'Transport towarów po UE',
-                'Prowadzenie dokumentacji przewozowej'
-            ],
-            'expectancies' => [
-                'Prawo jazdy kat. C+E',
-                'Karta kierowcy, kurs na przewóz rzeczy'
-            ],
-            'additionals' => [
-                'Doświadczenie min. 1 rok w zawodzie'
-            ],
-            'assurances' => [
-                'System pracy 3/1 lub 4/1',
-                'Nowoczesna flota'
-            ],
+            'name' => 'Konsultant klienta',
+            'slug' => Str::slug('Konsultant klienta'),
+            'image_path' => 'offer/konsultant.jpg',
+            'description' => 'Praca polegająca na telefonicznym kontakcie z klientem i obsłudze zapytań.',
+            'tasks' => ['Obsługa zapytań telefonicznych', 'Aktualizacja danych klientów'],
+            'expectancies' => ['Dobra dykcja', 'Podstawowa obsługa komputera'],
+            'additionals' => ['Doświadczenie w call center'],
+            'assurances' => ['Szkolenia wdrożeniowe', 'System premiowy'],
+            'active' => true,
+            'vacancy' => 3,
+            'user_id' => 4,
+            'payment' => PaymentType::MNETTO,
+            'salary' => 4500,
+            'category_id' => $categoryObsluga->id,
+            'employment' => Employment::CZESC_ETATU,
+            'contract' => Contract::UMOWA_ZLECENIE,
+            'work_mode' => WorkMode::PRACA_HYBRYDOWA
+        ]);
+
+        Offer::create([
+            'name' => 'Technik energetyk',
+            'slug' => Str::slug('Technik energetyk'),
+            'image_path' => 'offer/energetyk.jpg',
+            'description' => 'Praca przy utrzymaniu infrastruktury energetycznej zakładu.',
+            'tasks' => ['Monitorowanie instalacji elektrycznych', 'Usuwanie awarii energetycznych'],
+            'expectancies' => ['Uprawnienia SEP do 1kV', 'Gotowość do pracy w terenie'],
+            'additionals' => ['Doświadczenie w branży'],
+            'assurances' => ['Auto służbowe', 'Dodatkowe ubezpieczenie NNW'],
             'active' => true,
             'vacancy' => 1,
-            'user_id' => $user->id,
-            'payment' => PaymentType::MNETTO,
-            'salary' => 8500,
-            'category_id' => $transport->id,
+            'user_id' => 2,
+            'payment' => PaymentType::MBRUTTO,
+            'salary' => 7200,
+            'category_id' => $categoryEnergetyka->id,
             'employment' => Employment::PELNY_ETAT,
             'contract' => Contract::UMOWA_O_PRACE,
             'work_mode' => WorkMode::PRACA_MOBILNA
-        ]);
-
-        Offer::create([
-            'name' => 'Nauczyciel matematyki',
-            'slug' => Str::slug('Nauczyciel matematyki'),
-            // 'image_path' => 'offer/nauczyciel.png',
-            'description' => 'Szkoła podstawowa zatrudni nauczyciela matematyki.',
-            'tasks' => [
-                'Prowadzenie zajęć edukacyjnych',
-                'Przygotowanie materiałów i sprawdzianów'
-            ],
-            'expectancies' => [
-                'Wykształcenie kierunkowe',
-                'Umiejętność pracy z dziećmi'
-            ],
-            'additionals' => [
-                'Doświadczenie w nauczaniu zdalnym'
-            ],
-            'assurances' => [
-                'Stabilne zatrudnienie',
-                'Dodatki motywacyjne'
-            ],
-            'active' => true,
-            'vacancy' => 1,
-            'user_id' => $user->id,
-            'payment' => PaymentType::MNETTO,
-            'salary' => 4800,
-            'category_id' => $education->id,
-            'employment' => Employment::PELNY_ETAT,
-            'contract' => Contract::UMOWA_O_PRACE,
-            'work_mode' => WorkMode::PRACA_STACJONARNA
         ]);
     }
 }

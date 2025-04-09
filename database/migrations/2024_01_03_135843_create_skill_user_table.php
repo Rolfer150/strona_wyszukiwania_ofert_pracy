@@ -17,7 +17,6 @@ return new class extends Migration
             $table->foreignId('user_id')
                 ->constrained('users')
                 ->cascadeOnDelete();
-//            $table->foreignId('skill_id', ProgrammingSkills::values());
             $table->foreignId('skill_id')
                 ->constrained('skills')
                 ->cascadeOnDelete();
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('skills');
+        Schema::dropIfExists('skill_user');
     }
 };

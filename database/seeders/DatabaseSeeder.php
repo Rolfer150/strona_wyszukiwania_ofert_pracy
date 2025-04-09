@@ -27,14 +27,15 @@ class DatabaseSeeder extends Seeder
             //            WorkModeSeeder::class,
             RoleSeeder::class,
             SkillSeeder::class,
-            UserSeeder::class
+            UserSeeder::class,
+            OfferSeeder::class,
         ]);
 
         User::factory(80)->create()->each(function ($user) {
             $role = Arr::random(['employer', 'candidate']);
             $user->assignRole($role);
         });
-        Offer::factory(1000)->create();
+        // Offer::factory(1000)->create();
         Company::factory(100)->create();
         //        Skill::factory(200)->create();
 

@@ -1,19 +1,14 @@
 <x-app-layout>
-    <h3>Lista wysłanych aplikacji</h3>
-    {{--    @foreach($favourite as $favourite)--}}
-    {{--        <x-offer-item :offer="$favourite" wire:key="{{$favourite->id}}"></x-offer-item>--}}
-    {{--    @endforeach--}}
-    @foreach($applies as $apply)
-        <div class="bg-gray-500 text-white">
-            <p>{{$apply->id}}</p>
-            <p>{{$apply->user->name}}</p>
-            <p>{{$apply->offer->name}}</p>
-            <p>{{$apply->status}}</p>
+    <div class="p-3">
+        <h3 class="text-2xl font-semibold mb-4">Lista Twoich aplikacji</h3>
+
+        <div class="grid grid-cols-2 gap-4">
+            @foreach($applies as $apply)
+                <div class="p-4 border rounded-lg shadow-md">
+                    {{-- Komponent Livewire do generowania materiałów pomocniczych --}}
+                    @livewire('offer-application-list', ['apply' => $apply], key($apply->id))
+                </div>
+            @endforeach
         </div>
-        <form method="post" action="{{route('offer-application.destroy', $apply->id)}}">
-            @csrf
-            @method('DELETE')
-            <button type="submit">Usuń</button>
-        </form>
-    @endforeach
+    </div>
 </x-app-layout>

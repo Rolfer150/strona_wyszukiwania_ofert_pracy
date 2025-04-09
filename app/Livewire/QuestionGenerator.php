@@ -34,7 +34,9 @@ class QuestionGenerator extends Component
                 'description' => $this->offer->description ?? '',
                 'tasks' => array_map('strval', is_array($this->offer->tasks) ? $this->offer->tasks : []),
                 'expectancies' => array_map('strval', is_array($this->offer->expectancies) ? $this->offer->expectancies : []),
+                'category' => $this->offer->category->slug ?? '',
             ]);
+
 
             $this->generatedQuestions = $response->json()['questions'] ?? ['Brak odpowiedzi z serwera'];
         } catch (\Exception $e) {

@@ -83,7 +83,7 @@
                         <h1 class="text-2xl">Umiejętności</h1>
                         <div class="flex">
                             @foreach($user->skills as $skill)
-                                <p class="mr-4">{{$skill->skill}}: {{$skill->skill_level}}</p>
+                                <p class="mr-4">{{$skill->name}}: {{$skill->skill_level}}</p>
                             @endforeach
                         </div>
                     </div>

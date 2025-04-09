@@ -25,7 +25,7 @@ class OfferApplicationController extends Controller
 
     public function apply(Offer $offer): View
     {
-        abort_if($offer->userHasApplied(),404);
+        abort_if($offer->userHasApplied(), 404);
 
         Session::put('id', $offer->id);
 
@@ -63,6 +63,6 @@ class OfferApplicationController extends Controller
         $offerApplication->status = OfferApplicationStatus::ANNULLED->value;
         $offerApplication->save();
         $offerApplication->delete();
-        return redirect(route('sidewidgets.applyindex'));
+        return redirect(route('home'));
     }
 }
